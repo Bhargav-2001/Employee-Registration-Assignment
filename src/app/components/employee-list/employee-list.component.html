@@ -1,0 +1,59 @@
+<div class="list-container">
+  <h2>Registered Employees</h2>
+
+  <!-- Filters -->
+  <div class="filters">
+    <input type="text" [(ngModel)]="filterName" (input)="applyFilter()" placeholder="Filter by name...">
+    <input type="text" [(ngModel)]="filterMobile" (input)="applyFilter()" placeholder="Filter by mobile...">
+  </div>
+
+  <!-- Employee Table -->
+  <div class="table-wrapper" *ngIf="pagedEmployees.length > 0; else noData">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Mobile</th>
+          <th>Age</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emp of pagedEmployees">
+          <td>{{ emp.employeeId }}</td>
+          <td>{{ emp.employeeName }}</td>
+          <td>{{ emp.mobileNum }}</td>
+          <td>{{ emp.age }}</td>
+          <td class="actions">
+            <button class="btn-edit" (click)="onEdit(emp)">Edit</button>
+            <button class="btn-delete" (click)="confirmDelete(emp)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noData>
+    <p class="no-data">No employees found.</p>
+  </ng-template>
+
+  <!-- Pagination -->
+  <div class="pagination" *ngIf="totalPages > 1">
+    <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">&laquo; Prev</button>
+    <button *ngFor="let page of pages" (click)="goToPage(page)" [class.active]="page === currentPage">{{ page }}</button>
+    <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next &raquo;</button>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal-overlay" *ngIf="showDeleteConfirm">
+    <div class="modal">
+      <h3>Confirm Delete</h3>
+      <p>Are you sure you want to delete employee <strong>{{ employeeToDelete?.employeeName }}</strong>?</p>
+      <div class="modal-actions">
+        <button class="btn-confirm" (click)="deleteEmployee()">Yes, Delete</button>
+        <button class="btn-cancel" (click)="cancelDelete()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

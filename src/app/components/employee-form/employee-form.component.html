@@ -1,0 +1,100 @@
+<div class="form-container">
+  <h2>{{ isEditMode ? 'Edit Employee' : 'Employee Registration' }}</h2>
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+
+    <!-- Employee Name -->
+    <div class="form-group">
+      <label for="employeeName">Employee Name <span class="required">*</span></label>
+      <input type="text" id="employeeName" formControlName="employeeName" placeholder="Enter employee name">
+      <div class="error" *ngIf="f['employeeName'].touched && f['employeeName'].errors">
+        <span *ngIf="f['employeeName'].errors?.['required']">Employee Name is required.</span>
+        <span *ngIf="f['employeeName'].errors?.['pattern']">Only alphabets are allowed.</span>
+      </div>
+    </div>
+
+    <!-- Date of Birth -->
+    <div class="form-group">
+      <label for="dob">Date of Birth</label>
+      <input type="date" id="dob" formControlName="dob" (change)="onDobChange()" [max]="'2026-07-10'">
+    </div>
+
+    <!-- Age -->
+    <div class="form-group">
+      <label for="age">Age <span class="required">*</span></label>
+      <input type="text" id="age" formControlName="age" placeholder="Enter age">
+      <div class="error" *ngIf="f['age'].touched && f['age'].errors">
+        <span *ngIf="f['age'].errors?.['required']">Age is required.</span>
+        <span *ngIf="f['age'].errors?.['pattern']">Age must be 1 to 3 digits.</span>
+      </div>
+    </div>
+
+    <!-- Mobile Number -->
+    <div class="form-group">
+      <label for="mobileNum">Mobile Number <span class="required">*</span></label>
+      <input type="text" id="mobileNum" formControlName="mobileNum" placeholder="Enter 10-digit mobile number" maxlength="10">
+      <div class="error" *ngIf="f['mobileNum'].touched && f['mobileNum'].errors">
+        <span *ngIf="f['mobileNum'].errors?.['required']">Mobile Number is required.</span>
+        <span *ngIf="f['mobileNum'].errors?.['pattern']">Mobile number must be exactly 10 digits.</span>
+      </div>
+    </div>
+
+    <!-- Address Line 1 -->
+    <div class="form-group">
+      <label for="addressLine1">Address Line 1 <span class="required">*</span></label>
+      <textarea id="addressLine1" formControlName="addressLine1" rows="3" placeholder="Enter address line 1"></textarea>
+      <div class="error" *ngIf="f['addressLine1'].touched && f['addressLine1'].errors">
+        <span *ngIf="f['addressLine1'].errors?.['required']">Address Line 1 is required.</span>
+        <span *ngIf="f['addressLine1'].errors?.['specialChars']">Characters $, %, !, + are not allowed.</span>
+      </div>
+    </div>
+
+    <!-- Address Line 2 -->
+    <div class="form-group">
+      <label for="addressLine2">Address Line 2</label>
+      <textarea id="addressLine2" formControlName="addressLine2" rows="3" placeholder="Enter address line 2 (optional)"></textarea>
+      <div class="error" *ngIf="f['addressLine2'].touched && f['addressLine2'].errors">
+        <span *ngIf="f['addressLine2'].errors?.['specialChars']">Characters $, %, !, + are not allowed.</span>
+      </div>
+    </div>
+
+    <!-- Pincode -->
+    <div class="form-group">
+      <label for="pincode">Pincode <span class="required">*</span></label>
+      <input type="text" id="pincode" formControlName="pincode" placeholder="Enter 6-digit pincode" maxlength="6">
+      <div class="error" *ngIf="f['pincode'].touched && f['pincode'].errors">
+        <span *ngIf="f['pincode'].errors?.['required']">Pincode is required.</span>
+        <span *ngIf="f['pincode'].errors?.['pattern']">Pincode must be exactly 6 digits.</span>
+      </div>
+    </div>
+
+    <!-- Country -->
+    <div class="form-group">
+      <label for="countryId">Country <span class="required">*</span></label>
+      <select id="countryId" formControlName="countryId" (change)="onCountryChange()">
+        <option value="">Select Country</option>
+        <option *ngFor="let country of countries" [value]="country.countryId">{{ country.countryName }}</option>
+      </select>
+      <div class="error" *ngIf="f['countryId'].touched && f['countryId'].errors">
+        <span *ngIf="f['countryId'].errors?.['required']">Country is required.</span>
+      </div>
+    </div>
+
+    <!-- State -->
+    <div class="form-group">
+      <label for="stateId">State <span class="required">*</span></label>
+      <select id="stateId" formControlName="stateId">
+        <option value="">Select State</option>
+        <option *ngFor="let state of states" [value]="state.stateId">{{ state.stateName }}</option>
+      </select>
+      <div class="error" *ngIf="f['stateId'].touched && f['stateId'].errors">
+        <span *ngIf="f['stateId'].errors?.['required']">State is required.</span>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="form-actions">
+      <button type="submit" class="btn-submit">{{ isEditMode ? 'Update' : 'Register' }}</button>
+      <button type="button" class="btn-reset" (click)="resetForm()">Reset</button>
+    </div>
+  </form>
+</div>
