@@ -1,27 +1,189 @@
-# EzoAssign
+# Employee Registration Assignment
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.7.
+## Project Overview
+This is a Full Stack Employee Registration Application developed using:
 
-## Development server
+- Frontend: Angular
+- Backend: ASP.NET Core Web API (.NET 8)
+- Database: SQL Server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+The application allows users to:
 
-## Code scaffolding
+- Register Employees
+- View Employee List
+- Edit Employee Details
+- Delete Employees
+- Search Employees by Name and Mobile Number
+- Filter Country and State
+- Validate Duplicate Mobile Numbers
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+## Technology Stack
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Frontend
+- Angular
+- TypeScript
+- Bootstrap
+- HTML/CSS
 
-## Running unit tests
+### Backend
+- ASP.NET Core Web API (.NET 8)
+- Entity Framework Core
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Database
+- SQL Server
 
-## Running end-to-end tests
+---
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Project Structure
 
-## Further help
+```text
+Employee-Registration-Assignment
+│
+├── Database
+│   └── EmployeeDB.sql
+│
+├── Ezo_assign
+│   └── ASP.NET Core Web API (.NET 8)
+│
+├── Front-End
+│   └── Angular Application
+│
+├── README.md
+└── .gitignore
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+
+## Features Implemented
+
+### Employee Registration
+- Auto-generated Employee Id
+- Employee Name validation (Alphabets only)
+- Age validation (Numbers only)
+- Mobile Number validation (10 digits)
+- Duplicate Mobile Number validation
+- Date of Birth validation
+- Address validation
+- Pincode validation
+- Country and State dropdown functionality
+
+### Employee Management
+- Create Employee
+- View Employee List
+- Edit Employee
+- Delete Employee
+- Search by Employee Name
+- Search by Mobile Number
+- Pagination (5 records per page)
+
+---
+
+# Database Setup
+
+### Step 1
+Open SQL Server Management Studio (SSMS).
+
+### Step 2
+Execute:
+
+```text
+Database/EmployeeDB.sql
+```
+
+This script will:
+
+- Create Employee database
+- Create Country_Mst table
+- Create State_Mst table
+- Create Employee_Mst table
+- Insert sample Country and State data
+
+---
+
+# Backend Setup
+
+## Prerequisites
+- Visual Studio 2022
+- .NET 8 SDK
+- SQL Server
+
+## Steps
+
+1. Open:
+
+```text
+Ezo_assign.sln
+```
+
+2. Update the connection string in:
+
+```text
+appsettings.json
+```
+
+Example:
+
+```json
+"ConnectionStrings": {
+  "DefaultConnection": "Server=YOUR_SERVER;Database=Employee;Trusted_Connection=True;TrustServerCertificate=True"
+}
+```
+
+3. Run the application.
+
+Swagger URL:
+
+```text
+https://localhost:<port>/swagger
+```
+
+---
+
+# Frontend Setup
+
+## Prerequisites
+
+- Node.js
+- Angular CLI
+
+## Install Dependencies
+
+```bash
+npm install
+```
+
+## Run the Application
+
+```bash
+ng serve
+```
+
+Application URL:
+
+```text
+http://localhost:4200
+```
+
+---
+
+# API Endpoints
+
+## Employee APIs
+
+| Method | Endpoint |
+|--------|-----------|
+| GET | /api/employee |
+| GET | /api/employee/{id} |
+| POST | /api/employee |
+| PUT | /api/employee/{id} |
+| DELETE | /api/employee/{id} |
+
+
+
+# Author
+
+**Bhargav Kumar**
+
+Full Stack Developer (.NET | Angular)
